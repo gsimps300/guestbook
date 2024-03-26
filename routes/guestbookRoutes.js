@@ -1,17 +1,20 @@
 const express = require('express');
 const router = express.Router(); 
+const controller = require('../controllers/guestbookControllers.js');
 
 router.get('/about', function(req, res) {
-    res.redirect('/about.html');
+    //res.sendFile('about.html');
+    //res.send('about route')
+    res.redirect('about.html');
     }) 
 
-router.get('/guestbook', function(req, res) {
-    res.send('<h1>Guestbook Messages</h1>');
-    })
+router.get('/guestbook', controller.entries_list);
 
-router.get("/", function(req, res) {
-    res.send('Hello and welcome to the guestbook application.');
-    })
+router.get("/", controller.landing_page);
+
+router.get('/new', controller.new_entry); 
+
+router.get('/peter', controller.peters_entries);
 
 router.use(function(req, res) {
     res.status(404);
