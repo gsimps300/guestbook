@@ -1,18 +1,36 @@
 <html>
 <head>
-<title>Mustache Example</title>
+    {{>header}}
 </head>
 <body>
-<h1>{{title}}</h1>
-<div >
-<div>
-<h4> {{subject}} </h4>
-<p>
-{{contents}}
-</p>
-<div>
-The author's name will be displayed here
-</div>
-</div>
+    <h1>{{title}}</h1>
+    {{>write}}
+    {{#entries}}
+        <div>
+            <h4>{{subject}}</h4>
+            <p>{{contents}}</p>
+            <div class="card-footer">
+                <p>Written by <a href="/posts/{{author}}">{{author}}</a>, on {{published}}</p>
+            </div>
+        </div>
+    {{/entries}}
+    {{^entries}}
+        No entries yet.
+    {{/entries}}
 </body>
 </html>
+<div class="text-right" style="margin-bottom: 1em;">
+{{^user}}
+ <a id="login" href="/register" class="btn btn-primary">
+ Register
+ </a>
+ <a id="login" href="/login" class="btn btn-primary">
+ Sign in
+ </a>
+{{/user}}
+{{#user}}
+ <a id="logout" href="/logout" class="btn btn-primary">
+ Sign out
+ </a>
+{{/user}}
+</div>
